@@ -14,6 +14,33 @@ A lightweight Model Context Protocol (MCP) server that exposes safe, read-focuse
 
 ---
 
+### Learnings
+#### Best way to represent schemas to GPT?
+Use a markdown file, likely one for each table
+```
+<SCHEMA>
+tables:
+  Employees:
+    columns:
+      id: int (PK)
+      name: string
+      department_id: int (FK → Departments.id)
+      status: enum["ACTIVE","INACTIVE"]
+</SCHEMA>
+```
+
+#### Schema Prompting
+https://medium.com/@nikunj.agarwal012/schema-prompting-a-revolutionary-approach-to-querying-databases-b950954ccc62
+* Schema prompting involves giving a language model (LLM) a formal description of a database schema (tables, columns, types, relationships) along with the user’s natural-language request
+* Lowers barrier to entry - non-SQL-savvy users or analysts can query the database by asking in natural language
+* Speeds up query generation - developers and analysts save time compared to writing SQL by hand.
+
+1. Schema definition - listing tables, columns, types, relationships (Done by the developer)
+2. User question - what data the user wants, in natural language. (Done by a user)
+3. Instruction to generate SQL - telling the model to output a SQL query based on the schema + question. (Done by a LLM)
+4. Executed SQL - Run the SQL against the database and respond to the user with the response. (Done by this project)
+---
+
 ### Project layout
 - `SqlServer-MCP/Program.cs`: Configures the web host, reads the connection string, registers MCP server and tools, maps MCP endpoint, and runs at `http://localhost:3001`.
 - `SqlServer-MCP/SqlServerTools.cs`: Implements the MCP tools for SQL Server (listed above).
