@@ -100,7 +100,7 @@ Security note: `SqlRunQuery` intentionally rejects non-SELECT statements.
 - Startup assertion: `Assertion failed. connString != null`
   - Cause: No connection string found.
   - Fixes:
-    - Ensure `appsettings.json` exists and is copied to output (the project already includes:
+    - Ensure `appsettings.json` exists and is copied to output, the project already includes:
       ```xml
       <ItemGroup>
         <Content Include="appsettings.json">
@@ -108,7 +108,6 @@ Security note: `SqlRunQuery` intentionally rejects non-SELECT statements.
         </Content>
       </ItemGroup>
       ```
-      )
     - Confirm the key path is exactly `ConnectionStrings` → `SqlServer`.
     - Provide via environment variable `ConnectionStrings__SqlServer` if preferred.
 
